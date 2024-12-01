@@ -68,7 +68,7 @@ REMOTE_SCRIPT_FILE="/home/validation/entrypoint"
 TAG_NAME="esp-validation-exp:latest"
 
 cleanup() {
-    echo docker rm -f "$CONTAINER_NAME"
+    docker rm -f "$CONTAINER_NAME"
 }
 trap cleanup EXIT
 
