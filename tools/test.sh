@@ -12,8 +12,6 @@ CARGO_DIR="$HOME/.cargo"
 
 export PATH="$ESP_RUST_TOOLCHAIN_DIR/bin:$STABLE_RUST_TOOLCHAIN_DIR/bin:$CARGO_DIR/bin:$PATH"
 source "$HOME/export-esp.sh"
-"$IDF_CHECKOUT/install.sh" esp32
-source "$IDF_CHECKOUT/export.sh"
 
 REV="$IDF_SYS_REVISION"
 if [[ "$USE_NEW_EMBUILD" = "0" ]]
@@ -29,6 +27,7 @@ then
     echo '$USE_CHANGES != 1, using stable config' >&2
 else
     echo '$USE_CHANGES = 1, using new config' >&2
+    "$IDF_CHECKOUT/install.sh" esp32
     source "$IDF_CHECKOUT/export.sh"
 fi
 
