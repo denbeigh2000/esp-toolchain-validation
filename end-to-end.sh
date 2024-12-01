@@ -91,6 +91,6 @@ docker run \
     bash -c "$(<"$SCRIPT_FILE")"
 set -e
 
-BUILD_DIR="$(mktemp "$(pwd)/build-dir-XXX")"
+BUILD_DIR="$(mktemp -d "$(pwd)/build-dir-XXX")"
 docker cp "$CONTAINER_NAME:$OUTPUT_DIR" "$BUILD_DIR"
 echo "Copied build directory to $BUILD_DIR"
