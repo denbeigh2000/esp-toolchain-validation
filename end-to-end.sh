@@ -77,6 +77,8 @@ docker build \
     --tag "$TAG_NAME" \
     "$WORKDIR" 
 info
+# Ensure we don't exit early if this fails
+set +e
 docker run \
     --name "$CONTAINER_NAME" \
     --env "USE_CHANGES=$USE_CHANGES" \
@@ -87,6 +89,7 @@ docker run \
     --tty \
     "$TAG_NAME" \
     bash -c "$(<"$SCRIPT_FILE")"
+set -e
 
 BUILD_DIR="$(mktemp "$(pwd)/build-dir-XXX")"
 docker cp "$CONTAINER_NAME:$OUTPUT_DIR" "$BUILD_DIR"
