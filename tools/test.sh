@@ -22,11 +22,11 @@ fi
 git -C "$IDF_SYS_CHECKOUT" checkout "$REV"
 git -C "$IDF_SYS_CHECKOUT" submodule update --init --recursive
 
-if [[ "${USE_CHANGES:-}" != "1" ]]
+if [[ "${USE_LOCAL_IDF:-}" != "1" ]]
 then
-    echo '$USE_CHANGES != 1, using stable config' >&2
+    echo '$USE_LOCAL_IDF != 1, using stable config' >&2
 else
-    echo '$USE_CHANGES = 1, using new config' >&2
+    echo '$USE_LOCAL_IDF = 1, using new config' >&2
     "$IDF_CHECKOUT/install.sh" esp32
     source "$IDF_CHECKOUT/export.sh"
 fi

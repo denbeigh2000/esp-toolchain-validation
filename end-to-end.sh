@@ -4,7 +4,7 @@ set -euo pipefail
 
 WORKDIR="$(git rev-parse --show-toplevel)"
 MANGLE_GIT="${MANGLE_GIT:-0}"
-USE_CHANGES="${USE_CHANGES:-0}"
+USE_LOCAL_IDF="${USE_LOCAL_IDF:-0}"
 USE_NEW_EMBUILD="${USE_NEW_EMBUILD:-1}"
 
 IDF_REVISION="release/v5.3"
@@ -15,7 +15,7 @@ err() {
 
 info() {
     changes_state="will not"
-    if [[ "$USE_CHANGES" = "1" ]]
+    if [[ "$USE_LOCAL_IDF" = "1" ]]
     then
         changes_state="will"
     fi
@@ -38,7 +38,7 @@ info() {
     echo "MANGLE_GIT is set to $MANGLE_GIT"
     echo "Git $git_mangle_state be removed from IDF_PATH"
     echo
-    echo "USE_CHANGES is set to $USE_CHANGES"
+    echo "USE_LOCAL_IDF is set to $USE_LOCAL_IDF"
     echo "IDF_PATH $changes_state be set"
     echo
     echo "USE_NEW_EMBUILD is set to $USE_NEW_EMBUILD"
@@ -81,7 +81,7 @@ info
 set +e
 docker run \
     --name "$CONTAINER_NAME" \
-    --env "USE_CHANGES=$USE_CHANGES" \
+    --env "USE_LOCAL_IDF=$USE_LOCAL_IDF" \
     --env "MANGLE_GIT=$MANGLE_GIT" \
     --env "USE_NEW_EMBUILD=$USE_NEW_EMBUILD" \
     --env "RUNTIME_IDF_REVISION=$IDF_REVISION" \
